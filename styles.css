@@ -1,0 +1,349 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Anton', sans-serif;
+  overflow-x: hidden;
+  width: 100%;
+  background-color: #000;
+  color: #a8a8a8;
+}
+
+header {
+  background-color: #111;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  color: #ffba4c;
+  padding: 2rem;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+nav {
+  padding: 1rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+nav ul {
+  display: flex;
+  list-style-type: none;
+  justify-content: center;
+}
+
+nav ul li {
+  margin: 0 1rem;
+}
+
+nav ul li a {
+  color: #a8a8a8;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+h2 {
+  color: #fff;
+  font-size: 2rem;
+  margin-top: 2rem;
+  padding: 1rem;
+  margin-bottom: 1em;
+}
+
+.input-area {
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem;
+}
+
+input {
+  padding: 1rem;
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  background-color: #ffba4c;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
+}
+
+section {
+  position: relative;
+  padding: 2rem 0;
+  padding-top: 60px;
+  margin-top: -60px;
+}
+
+section .movies {
+  padding: 0 2rem;
+}
+
+.movies {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.pagination {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+#movies-con .movies {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.movie-card {
+  position: relative;
+  width: 100%;
+  padding-top: 150%; /* 2:3 비율 유지 */
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.movie-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-position: center;
+  transition: transform 0.3s ease;
+}
+
+.movie-card:hover .movie-image {
+  transform: scale(1);
+}
+
+.movie-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 1rem;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.movie-card:hover .movie-overlay {
+  transform: translateY(0);
+}
+
+.movie-title {
+  margin: 0;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.movie-rates,
+.movie-release-date {
+  font-size: 1rem;
+  color: #ffba4c;
+}
+
+#recent-movies {
+  position: relative;
+}
+
+#recent-movies .movies-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+#recent-movies .movie-item {
+  position: relative;
+  padding: 1rem;
+  width: 100%;
+}
+
+#recent-movies .movie-poster {
+  object-fit: cover;
+}
+
+#recent-movies .movie-info {
+  position: absolute;
+  bottom: 0;
+  right: -250px;
+  width: 200px;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#recent-movies .movie-item.active .movie-info {
+  opacity: 1;
+}
+
+#recent-movies .movie-info h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  color: #ffba4c;
+}
+
+#recent-movies .movie-info p {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+#category .movies {
+  grid-template-columns: repeat(5, 1fr);
+  width: 100%;
+  list-style: none;
+}
+.category-con {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 2rem;
+  margin-bottom: 20px;
+}
+
+.category-btn {
+  margin: 5px;
+  padding: 10px 10px;
+  background-color: #000;
+  color: #a8a8a8;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-left: 1rem;
+  cursor: pointer;
+  border: none;
+}
+
+#movies-con::after,
+#recent-movies::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 1px;
+  background-color: #a8a8a8;
+}
+
+.movies li img,
+#recent-movies .movie-poster,
+#category .movies img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+#recent-movies .movie-item.active .movie-poster {
+  height: 400px;
+}
+
+.modal {
+  /* position: fixed; */
+  display: none;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #f9f9f9;
+  display: none;
+  padding: 20px;
+  border: 1px solid #888;
+  max-width: 500px;
+  width: 100%;
+  border-radius: 5px;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  background-color: #ffba4c;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+.movie-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.movie-detail {
+  border: 1px solid red;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.movie-detail h2 {
+  color: #333;
+}
+
+.movie-detail p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.review-con {
+  display: flex;
+  width: 100%;
+}
+
+#review-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.confirm-btn {
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 900px) {
+  #movies-con .movies {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
