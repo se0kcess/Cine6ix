@@ -154,7 +154,6 @@ section .movies {
 .movie-title {
   margin: 0;
   font-size: 1.2rem;
-  color: #ffba4c;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
