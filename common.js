@@ -32,7 +32,7 @@ const fetchTopRatedMovies = async (page = 1) => {
 const fetchMoviesByGenre = async (genreId, page = 1) => {
   try {
     const response = await fetch(
-      `${URL}/discover/movie?api_key=${API_KEY_TMDB}&with_genres=${genreId}&page=${page}&sort_by=popularity.desc&language=ko`,
+      `${URL}/discover/movie?api_key=${API_KEY_TMDB}&with_genres=${genreId}&page=${page}&sort_by=vote_average.desc&vote_count.gte=50&language=ko`,
       options
     );
     const data = await response.json();
@@ -156,9 +156,9 @@ const loadMoviesByGenre = async (genreId, genreName) => {
   const movies = await fetchMoviesByGenre(genreId);
   if (movies) {
     displayMovies(movies.slice(0, 15), $categoryMovies);
-    document.querySelector('#category h2').textContent = `${genreName} 영화`;
+    document.querySelector('#category h2').textContent = `${genreName} 영화 (평점 순)`;
 
-    // 버튼 active 상태 변경
+    // 활성 버튼 스타일 변경
     $categoryButtons.forEach((button) => {
       button.classList.remove('active');
       if (button.dataset.genreId == genreId) {
