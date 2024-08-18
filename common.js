@@ -17,14 +17,14 @@ const $searchButton = document.getElementById('search-btn');
 const $sectionTitle = document.getElementById('section-title');
 const $categoryButtons = document.querySelectorAll('.category-btn');
 
-// 인기 영화 가져오기
-const fetchPopularMovies = async (page = 1) => {
+// 최신 인기 영화 가져오기 (Top Rated)
+const fetchTopRatedMovies = async (page = 1) => {
   try {
-    const response = await fetch(`${URL}/movie/popular?api_key=${API_KEY_TMDB}&language=ko&page=${page}`, options);
+    const response = await fetch(`${URL}/movie/top_rated?api_key=${API_KEY_TMDB}&language=ko&page=${page}`, options);
     const data = await response.json();
     return data.results;
   } catch (error) {
-    console.error('Error fetching popular movies:', error);
+    console.error('Error fetching top rated movies:', error);
   }
 };
 
@@ -63,12 +63,12 @@ const displayMovies = (movies, container) => {
   });
 };
 
-// 인기 영화 로드
-const loadPopularMovies = async () => {
-  const movies = await fetchPopularMovies();
+// 최신 인기 영화 로드
+const loadTopRatedMovies = async () => {
+  const movies = await fetchTopRatedMovies();
   if (movies) {
     displayMovies(movies.slice(0, 12), $moviesContainer);
-    $sectionTitle.textContent = '인기 영화';
+    $sectionTitle.textContent = '최신 인기 영화';
   }
 };
 
@@ -112,7 +112,7 @@ const initGenreButtons = async () => {
 
 // 초기화 함수
 async function init() {
-  await loadPopularMovies(); // 인기 영화를 movies-con 섹션에 로드
+  await loadTopRatedMovies(); // 최신 인기 영화를 movies-con 섹션에 로드
   const actionGenreId = await initGenreButtons();
   if (actionGenreId) {
     await loadMoviesByGenre(actionGenreId, '액션'); // 액션 영화를 category 섹션에 로드
