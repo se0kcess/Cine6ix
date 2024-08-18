@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/fce8ba74ee.js" crossorigin="anonymous"></script>
+    <script src="./common.js" defer></script>
+    <title>CINE6IX</title>
+  </head>
+  <body>
+    <header>
+      <h1>CINE<span style="color: white">6</span>IX</h1>
+      <nav>
+        <ul>
+          <li><a href="#movies-con">영화 검색</a></li>
+          <li><a href="#recent-movies">최신 영화</a></li>
+          <li><a href="#category">장르별 영화</a></li>
+        </ul>
+      </nav>
+      <div class="input-area">
+        <input type="text" id="search-input" placeholder="영화 검색" />
+        <button type="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+    </header>
+    <section id="movies-con">
+      <h2 id="section-title">인기 영화</h2>
+      <div class="movies">
+        <div class="movie-card" data-id="1">
+          <div class="movie-image" style="background-image: url('./js.png')">
+            <div class="movie-overlay">
+              <span class="movie-rates">평점</span>
+              <h3 class="movie-title">영화 제목</h3>
+              <span class="movie-release-date">제작연도</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pagination">이전 1 2 3 다음</div>
+    </section>
+    <section id="recent-movies">
+      <h2>최신 영화</h2>
+      <div class="movies-container">
+        <div class="movie-item active">
+          <img src="./js.png" alt="Movie 1" class="movie-poster" />
+          <div class="movie-info">
+            <h3>영화 제목 1</h3>
+            <p>영화 설명 ...</p>
+          </div>
+        </div>
+        <div class="movie-item">
+          <img src="./js.png" alt="Movie 2" class="movie-poster" />
+          <div class="movie-info">
+            <h3>영화 제목 2</h3>
+            <p>영화 설명 ...</p>
+          </div>
+        </div>
+        <div class="movie-item">
+          <img src="./js.png" alt="Movie 3" class="movie-poster" />
+          <div class="movie-info">
+            <h3>영화 제목 3</h3>
+            <p>영화 설명 ...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="category">
+      <h2>장르별</h2>
+      <div class="category-con">
+        <button class="category-btn" data-genre="액션">액션</button>
+        <button class="category-btn" data-genre="SF">SF</button>
+        <button class="category-btn" data-genre="드라마">드라마</button>
+        <button class="category-btn" data-genre="코미디">코미디</button>
+        <button class="category-btn" data-genre="스릴러">스릴러</button>
+        <button class="category-btn" data-genre="공포">공포</button>
+      </div>
+      <div class="movies">
+        <div class="movie-card" data-id="2">
+          <li><img src="./js.png" alt="Movie 1" /></li>
+        </div>
+      </div>
+      <div class="pagination">이전 1 2 3 4 5 다음</div>
+    </section>
+    <div class="modal" id="movies-modal">
+      <div class="modal-content">
+        <div class="close-btn">닫기</div>
+        <img src="./js.png" alt="Movie Poster" />
+        <div class="movie-detail">
+          <h2>영화 제목</h2>
+          <p>영화 설명...</p>
+        </div>
+        <div class="review-con">
+          <textarea id="review-input"></textarea>
+          <button class="confirm-btn">작성</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
