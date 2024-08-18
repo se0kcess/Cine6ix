@@ -154,6 +154,7 @@ section .movies {
 .movie-title {
   margin: 0;
   font-size: 1.2rem;
+  color: #ffba4c;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -188,6 +189,7 @@ section .movies {
   margin: 0 10px;
   position: relative;
   padding-top: 45%; /* 2:3 비율 유지 (30% * 1.5) */
+  overflow: hidden;
 }
 
 #recent-movies .movie-image {
@@ -227,6 +229,15 @@ section .movies {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+#recent-movies .movie-overview {
+  font-size: 0.9rem;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .slider-buttons {
