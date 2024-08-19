@@ -243,17 +243,18 @@ section .movies {
 .slider-buttons {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin: 20px;
+  gap: 10px;
 }
 
 .slider-buttons button {
-  margin: 0 10px;
-  padding: 10px 20px;
-  background-color: #ffba4c;
-  border: none;
-  color: white;
+  padding: 8px 12px;
+  margin: 0 4px;
+  border: 1px solid #ffba4c;
+  border-radius: 20px;
+  background-color: transparent;
+  color: #ffba4c;
   cursor: pointer;
-  border-radius: 5px;
 }
 
 #category .movies {
@@ -311,6 +312,7 @@ section .movies {
   padding: 8px 12px;
   margin: 0 4px;
   border: 1px solid #ffba4c;
+  border-radius: 20px;
   background-color: transparent;
   color: #ffba4c;
   cursor: pointer;
