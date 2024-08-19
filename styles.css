@@ -249,7 +249,7 @@ section .movies {
 }
 
 .slider-buttons button {
-  padding: 16px 24px;
+  padding: 15px 18px;
   margin: 0 4px;
   border: 1px solid #ffba4c;
   border-radius: 20px;
@@ -319,7 +319,7 @@ section .movies {
 }
 
 .pagination button {
-  padding: 16px 24px;
+  padding: 12px 15px;
   margin: 0 4px;
   border: 1px solid #ffba4c;
   border-radius: 20px;
