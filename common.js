@@ -74,12 +74,83 @@ const fetchMoviesByGenre = async (genreId, page = 1) => {
   }
 };
 
+// 영화 상세 정보 가져오기
+const fetchMovieDetails = async (movieId) => {
+  try {
+    const response = await fetch(`${URL}/movie/${movieId}?api_key=${API_KEY_TMDB}&language=ko`, options);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching movie details:', error);
+  }
+};
+
+// 영화 크레딧 정보 가져오기
+const fetchMovieCredits = async (movieId) => {
+  try {
+    const response = await fetch(`${URL}/movie/${movieId}/credits?api_key=${API_KEY_TMDB}&language=ko`, options);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching movie credits:', error);
+  }
+};
+
+// 모달 열기
+const openModal = async (movieId) => {
+  const movieDetails = await fetchMovieDetails(movieId);
+  const movieCredits = await fetchMovieCredits(movieId);
+
+  const director = movieCredits.crew.find((person) => person.job === 'Director');
+  const cast = movieCredits.cast
+    .slice(0, 5)
+    .map((actor) => actor.name)
+    .join(', ');
+
+  const modalContent = document.querySelector('.modal-content');
+  modalContent.innerHTML = `
+    <img src="${IMAGE_URL + movieDetails.poster_path}" alt="${movieDetails.title}" class="modal-poster">
+    <div class="movie-detail">
+      <h2>${movieDetails.title}</h2>
+      <p><strong>장르:</strong> ${movieDetails.genres.map((genre) => genre.name).join(', ')}</p>
+      <p><strong>개봉일:</strong> ${movieDetails.release_date}</p>
+      <p><strong>감독:</strong> ${director ? director.name : '정보 없음'}</p>
+      <p><strong>주요 배우:</strong> ${cast}</p>
+      <p><strong>줄거리:</strong> ${movieDetails.overview}</p>
+    </div>
+  `;
+
+  const modal = document.getElementById('movies-modal');
+  modal.style.display = 'flex';
+};
+
+// 모달 닫기
+const closeModal = () => {
+  const modal = document.getElementById('movies-modal');
+  modal.style.display = 'none';
+};
+
+// 영화 카드에 클릭 이벤트 추가 함수
+const addClickEventToMovieCards = () => {
+  const movieCards = document.querySelectorAll('.movie-card, .movie-item');
+  movieCards.forEach((card) => {
+    card.addEventListener('click', () => {
+      const movieId = card.dataset.id;
+      openModal(movieId);
+    });
+  });
+};
+
+// 모달 닫기 버튼에 이벤트 리스너 추가
+document.querySelector('.close-btn').addEventListener('click', closeModal);
+
 // 영화 표시 함수
 const displayMovies = (movies, container = $moviesContainer) => {
   container.innerHTML = '';
   movies.forEach((movie) => {
     const movieCard = document.createElement('div');
     movieCard.className = 'movie-card';
+    movieCard.dataset.id = movie.id;
     movieCard.innerHTML = `
       <div class="movie-image" style="background-image: url('${
         movie.poster_path ? IMAGE_URL + movie.poster_path : 'path_to_placeholder_image.jpg'
@@ -93,6 +164,7 @@ const displayMovies = (movies, container = $moviesContainer) => {
     `;
     container.appendChild(movieCard);
   });
+  addClickEventToMovieCards();
 };
 
 // 페이지네이션 업데이트 함수
@@ -200,6 +272,7 @@ const loadNowPlayingMoviesSlider = async () => {
     movies.forEach((movie) => {
       const movieItem = document.createElement('div');
       movieItem.className = 'movie-item';
+      movieItem.dataset.id = movie.id;
       movieItem.innerHTML = `
       <div class="movie-image" style="background-image: url('${
         movie.poster_path ? IMAGE_URL + movie.poster_path : 'path_to_placeholder_image.jpg'
@@ -211,6 +284,9 @@ const loadNowPlayingMoviesSlider = async () => {
       </div>
     `;
       slide.appendChild(movieItem);
+
+      // 클릭 이벤트 리스너
+      movieItem.addEventListener('click', () => openModal(movie.id));
     });
     return slide;
   };
@@ -304,6 +380,11 @@ async function init() {
       loadSearchResults();
     }
   });
+
+  // 모달 닫기 버튼에 이벤트 리스너 추가
+  document.querySelector('.close-btn').addEventListener('click', closeModal);
+  // 모든 영화 카드에 클릭 이벤트 추가
+  addClickEventToMovieCards();
 }
 
 // 페이지 로드 시 초기화
