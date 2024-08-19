@@ -279,6 +279,9 @@ section .movies {
   cursor: pointer;
   border: none;
 }
+.category-btn:active {
+  color: #ffba4c;
+}
 
 #movies-con::after,
 #recent-movies::after {
@@ -302,6 +305,27 @@ section .movies {
 
 #recent-movies .movie-item.active .movie-poster {
   height: 400px;
+}
+
+.pagination button {
+  padding: 8px 12px;
+  margin: 0 4px;
+  border: 1px solid #ffba4c;
+  background-color: transparent;
+  color: #ffba4c;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: #ffba4c;
+  color: white;
+}
+
+.pagination button.active {
+  background-color: white;
+  color: #ffba4c;
+  font-weight: bold;
 }
 
 .modal {
