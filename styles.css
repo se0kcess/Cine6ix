@@ -248,7 +248,7 @@ section .movies {
 }
 
 .slider-buttons button {
-  padding: 8px 12px;
+  padding: 16px 24px;
   margin: 0 4px;
   border: 1px solid #ffba4c;
   border-radius: 20px;
@@ -309,7 +309,7 @@ section .movies {
 }
 
 .pagination button {
-  padding: 8px 12px;
+  padding: 16px 24px;
   margin: 0 4px;
   border: 1px solid #ffba4c;
   border-radius: 20px;
@@ -331,28 +331,26 @@ section .movies {
 }
 
 .modal {
-  /* position: fixed; */
   display: none;
-  z-index: 1;
+  position: fixed;
+  z-index: 1000;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
+  background-color: rgba(0, 0, 0, 0.8);
   justify-content: center;
   align-items: center;
 }
 
-.modal-content {
-  background-color: #f9f9f9;
-  display: none;
+.modal-con {
+  background-color: #111;
   padding: 20px;
-  border: 1px solid #888;
-  max-width: 500px;
-  width: 100%;
-  border-radius: 5px;
+  border-radius: 10px;
+  max-width: 800px;
+  width: 90%;
+  color: #fff;
   position: relative;
 }
 
@@ -360,46 +358,45 @@ section .movies {
   position: absolute;
   top: 10px;
   right: 10px;
+  color: #fff;
+  font-size: 24px;
   cursor: pointer;
-  background-color: #ffba4c;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 3px;
-  font-size: 14px;
 }
 
-.movie-content img {
-  max-width: 100%;
+.modal-content {
+  display: flex;
+  gap: 20px;
+}
+
+.modal-poster {
+  max-width: 300px;
   height: auto;
-  border-radius: 5px;
-  margin-bottom: 10px;
 }
 
 .movie-detail {
-  border: 1px solid red;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex: 1;
 }
 
 .movie-detail h2 {
-  color: #333;
+  color: #ffba4c;
+  padding: 0;
+  margin-bottom: 10px;
+  text-align: left;
 }
 
 .movie-detail p {
-  color: #666;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .review-con {
+  margin-top: 10px;
   display: flex;
   width: 100%;
 }
 
 #review-input {
   width: 100%;
-  padding: 10px;
+  padding: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
 }
@@ -411,11 +408,4 @@ section .movies {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-}
-
-/* 반응형 디자인 */
-@media (max-width: 900px) {
-  #movies-con .movies {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
