@@ -263,6 +263,9 @@ section .movies {
   width: 100%;
   list-style: none;
 }
+#category h2 {
+  margin: 0;
+}
 .category-con {
   display: flex;
   justify-content: flex-end;
