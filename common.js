@@ -17,6 +17,7 @@ const $sectionTitle = document.getElementById('section-title');
 const $categoryButtons = document.querySelectorAll('.category-btn');
 const $recentMoviesContainer = document.querySelector('#recent-movies .movies-container');
 const $pagination = document.querySelector('#movies-con .pagination');
+const $logo = document.getElementById('logo');
 
 let currentPage = 1;
 let totalPages = 1;
@@ -385,6 +386,11 @@ async function init() {
   document.querySelector('.close-btn').addEventListener('click', closeModal);
   // 모든 영화 카드에 클릭 이벤트 추가
   addClickEventToMovieCards();
+
+  // 로고 클릭 시 페이지 새로고침
+  $logo.addEventListener('click', () => {
+    window.location.reload();
+  });
 }
 
 // 페이지 로드 시 초기화
