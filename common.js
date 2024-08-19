@@ -18,10 +18,13 @@ const $categoryButtons = document.querySelectorAll('.category-btn');
 const $recentMoviesContainer = document.querySelector('#recent-movies .movies-container');
 const $pagination = document.querySelector('#movies-con .pagination');
 const $logo = document.getElementById('logo');
+const $reviewInput = document.getElementById('review-input');
 
 let currentPage = 1;
 let totalPages = 1;
 let currentMovies = [];
+let currentSearchQuery = '';
+let currentMovieId = null;
 
 // 인기 영화 가져오기
 const fetchTopRatedMovies = async (page = 1) => {
@@ -99,6 +102,7 @@ const fetchMovieCredits = async (movieId) => {
 
 // 모달 열기
 const openModal = async (movieId) => {
+  currentMovieId = movieId;
   const movieDetails = await fetchMovieDetails(movieId);
   const movieCredits = await fetchMovieCredits(movieId);
 
@@ -123,6 +127,8 @@ const openModal = async (movieId) => {
 
   const modal = document.getElementById('movies-modal');
   modal.style.display = 'flex';
+
+  loadReview();
 };
 
 // 모달 닫기
@@ -223,6 +229,34 @@ const changePage = async (newPage) => {
 
   displayMovies(currentMovies.slice(0, 12));
   updatePagination();
+};
+
+// 리뷰 저장
+const saveReview = (review) => {
+  localStorage.setItem(`review_${currentMovieId}`, review);
+};
+
+// 리뷰 불러오기
+const loadReview = () => {
+  const review = localStorage.getItem(`review_${currentMovieId}`);
+  const $reviewDisplay = document.getElementById('review-display');
+  const $reviewText = document.getElementById('review-text');
+  const $reviewInputContainer = document.getElementById('review-input-container');
+
+  if (review) {
+    $reviewText.textContent = `한줄평 : ${review}`;
+    $reviewDisplay.style.display = 'block';
+    $reviewInputContainer.style.display = 'none';
+  } else {
+    $reviewDisplay.style.display = 'none';
+    $reviewInputContainer.style.display = 'block';
+  }
+};
+
+// 리뷰 삭제
+const deleteReview = () => {
+  localStorage.removeItem(`review_${currentMovieId}`);
+  loadReview();
 };
 
 // 검색 결과 로드
@@ -391,6 +425,26 @@ async function init() {
   $logo.addEventListener('click', () => {
     window.location.reload();
   });
+
+  // 리뷰 제출 버튼 이벤트 리스너
+  document.getElementById('submit-review').addEventListener('click', () => {
+    const review = document.getElementById('review-input').value;
+    if (review) {
+      saveReview(review);
+      loadReview();
+      $reviewInput.value = '';
+    }
+  });
+  $reviewInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      saveReview();
+      loadReview();
+      $reviewInput.value = '';
+    }
+  });
+
+  // 리뷰 삭제 버튼 이벤트 리스너
+  document.getElementById('delete-review').addEventListener('click', deleteReview);
 }
 
 // 페이지 로드 시 초기화
