@@ -53,6 +53,20 @@ const fetchNowPlayingMovies = async (page = 1) => {
   }
 };
 
+// 영화 검색 기능
+const searchMovies = async (query, page = 1) => {
+  try {
+    const response = await fetch(
+      `${URL}/search/movie?api_key=${API_KEY_TMDB}&language=ko&query=${encodeURIComponent(query)}&page=${page}`,
+      options
+    );
+    const data = await response.json();
+    return data.results;
+  } catch (error) {
+    console.error('Error searching movies:', error);
+  }
+};
+
 // 최신 영화 슬라이더 로드
 const loadNowPlayingMoviesSlider = async () => {
   let currentPage = 1;
@@ -151,12 +165,27 @@ const loadTopRatedMovies = async () => {
   }
 };
 
+// 검색 결과 로드
+const loadSearchResults = async () => {
+  const query = $searchInput.value.trim();
+  if (query) {
+    const movies = await searchMovies(query);
+    if (movies && movies.length > 0) {
+      displayMovies(movies.slice(0, 12), $moviesContainer);
+      $sectionTitle.textContent = `"${query}" 검색 결과`;
+    } else {
+      $moviesContainer.innerHTML = '<p>검색 결과가 없습니다.</p>';
+      $sectionTitle.textContent = `"${query}" 검색 결과`;
+    }
+  }
+};
+
 // 장르별 영화 로드
 const loadMoviesByGenre = async (genreId, genreName) => {
   const movies = await fetchMoviesByGenre(genreId);
   if (movies) {
     displayMovies(movies.slice(0, 15), $categoryMovies);
-    document.querySelector('#category h2').textContent = `${genreName} 영화 (평점 순)`;
+    document.querySelector('#category h2').textContent = `${genreName} 영화`;
 
     // 활성 버튼 스타일 변경
     $categoryButtons.forEach((button) => {
@@ -191,13 +220,13 @@ const initGenreButtons = async () => {
 
 // 초기화 함수
 async function init() {
-  await loadTopRatedMovies(); // 최신 인기 영화를 movies-con 섹션에 로드
+  await loadTopRatedMovies(); // 인기 영화를 movies-con 섹션에 로드
   await loadNowPlayingMoviesSlider(); // 최신 개봉 영화 슬라이더 로드
   const actionGenreId = await initGenreButtons();
   if (actionGenreId) {
     await loadMoviesByGenre(actionGenreId, '액션'); // 액션 영화를 category 섹션에 로드
   } else {
-    console.error('Action genre not found');
+    console.error(e);
   }
 
   $searchButton.addEventListener('click', loadSearchResults);

@@ -225,6 +225,7 @@ section .movies {
 #recent-movies .movie-title {
   margin: 0 0 0.5rem;
   font-size: 1.2rem;
+  color: #ffba4c;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
