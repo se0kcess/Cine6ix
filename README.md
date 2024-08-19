@@ -4,7 +4,7 @@
 **영화 검색 및 정보 제공 사이트**
 
 ## API
-https://developer.themoviedb.org/reference/intro/getting-started
+TMDB : https://developer.themoviedb.org/reference/intro/getting-started
 
 ## Design
 ![](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
