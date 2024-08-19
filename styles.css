@@ -409,7 +409,7 @@ section .movies {
 #review-input,
 #review-text {
   flex-grow: 1;
-  width: 90%;
+  width: 80%;
   padding: 10px;
   font-size: 16px;
   border-radius: 4px;
