@@ -1,10 +1,10 @@
 <div align="center">
 
-# Cine6ix🍿
+# Cine6ix 🍿
+**영화 검색 및 정보 제공 사이트**
 
-<img width="838" alt="image" src="https://github.com/user-attachments/assets/d863eca1-e048-4cae-9569-0b8e1d847c44">
 
-# Stacks
+# Stacks 🖥️
 
 ## Design
 ![](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
@@ -18,5 +18,23 @@
 ![](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white)
+
+# UI 
+
+## 인기 영화 섹션
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/18c7b99f-18cb-4b4c-9cc6-dbef5a65bbb0">
+
+## 최신 영화 섹션
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/ed04d367-a090-41a7-a753-15959caccc7d">
+
+## 장르별 영화 섹션
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/7ed81a80-9bb1-4ce3-ac0c-2593cc325061">
+
+## 영화 검색
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/75557d14-734a-4b7d-8596-4131e069babc">
+
+## 영화 포스터 클릭 시
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/834c056d-c363-4b08-a41b-5ee57a524d80">
+
 
 </div>
