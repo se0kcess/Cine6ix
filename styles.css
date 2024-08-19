@@ -73,7 +73,7 @@ input {
   padding: 1rem;
   width: 100%;
   border: none;
-  border-radius: 4px;
+  border-radius: 20px 0px 0px 20px;
 }
 
 button {
@@ -82,7 +82,7 @@ button {
   border: none;
   color: #fff;
   cursor: pointer;
-  border-radius: 0 4px 4px 0;
+  border-radius: 0px 20px 20px 0px;
 }
 
 section {
