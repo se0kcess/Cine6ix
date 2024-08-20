@@ -477,3 +477,23 @@ section .movies {
   gap: 20px;
   margin-bottom: 20px;
 }
+
+@media screen and (max-width: 900px) {
+  .movies {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  #category .movies {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .modal-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .modal-poster {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+}
