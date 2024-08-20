@@ -487,6 +487,14 @@ section .movies {
     grid-template-columns: repeat(4, 1fr);
   }
 
+  #recent-movies .movie-title {
+    font-size: 0.8rem;
+  }
+
+  #recent-movies .movie-overview {
+    font-size: 0.9rem;
+  }
+
   .modal-content {
     flex-direction: column;
     align-items: center;
