@@ -1,0 +1,9 @@
+{
+  "homepage": "https://se0kcess.github.io/Cine6ix/",
+  "scripts": {
+    "deploy": "gh-pages -d public"
+  },
+  "dependencies": {
+    "gh-pages": "^6.1.1"
+  }
+}
