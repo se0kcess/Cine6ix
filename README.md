@@ -3,6 +3,8 @@
 # Cine6ix 🍿
 **영화 검색 및 정보 제공 사이트**
 
+**배포 링크 : https://se0kcess.github.io/Cine6ix/**
+
 ## API
 TMDB : https://developer.themoviedb.org/reference/intro/getting-started
 
