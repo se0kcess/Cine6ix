@@ -24,6 +24,7 @@ header {
   align-items: center;
 }
 
+/* CINE6IX 로고 */
 h1 {
   color: #ffba4c;
   padding: 2rem;
@@ -32,6 +33,7 @@ h1 {
   cursor: pointer;
 }
 
+/* 네비게이션 (인기 영화, 최신 영화, 장르별 영화 */
 nav {
   padding: 1rem;
   width: 100%;
@@ -62,6 +64,7 @@ h2 {
   margin-bottom: 1em;
 }
 
+/* 영화 검색 창 */
 .input-area {
   display: flex;
   width: 100%;
@@ -96,19 +99,8 @@ section .movies {
   padding: 0 2rem;
 }
 
+/* 영화 포스터 이미지 */
 .movies {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.pagination {
-  padding: 1rem;
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-}
-
-#movies-con .movies {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
@@ -116,7 +108,7 @@ section .movies {
 .movie-card {
   position: relative;
   width: 100%;
-  padding-top: 150%; /* 2:3 비율 유지 */
+  padding-top: 150%;
   overflow: hidden;
   margin-bottom: 1rem;
 }
@@ -132,6 +124,7 @@ section .movies {
   transition: transform 0.3s ease;
 }
 
+/* 영화 포스터 hover 시 제목과 정보 오버레이 */
 .movie-card:hover .movie-image {
   transform: scale(1);
 }
@@ -166,6 +159,7 @@ section .movies {
   color: #ffba4c;
 }
 
+/* 최신 영화 섹션 */
 #recent-movies {
   position: relative;
   overflow: hidden;
@@ -188,7 +182,7 @@ section .movies {
   width: 30%;
   margin: 0 10px;
   position: relative;
-  padding-top: 45%; /* 2:3 비율 유지 (30% * 1.5) */
+  padding-top: 45%;
   overflow: hidden;
 }
 
@@ -203,6 +197,7 @@ section .movies {
   transition: transform 0.3s ease;
 }
 
+/* 최신영화 포스터 hover 시 영화 제목과 줄거리 오버레이 */
 #recent-movies .movie-item:hover .movie-image {
   transform: scale(1.05);
 }
@@ -232,15 +227,7 @@ section .movies {
   text-overflow: ellipsis;
 }
 
-#recent-movies .movie-overview {
-  font-size: 0.9rem;
-  margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
+/* 슬라이더 버튼 */
 .slider-buttons {
   display: flex;
   justify-content: center;
@@ -264,14 +251,17 @@ section .movies {
   transition: background-color 0.3s ease;
 }
 
+/* 장르별 영화 섹션 */
 #category .movies {
   grid-template-columns: repeat(5, 1fr);
   width: 100%;
   list-style: none;
 }
+
 #category h2 {
   margin: 0;
 }
+
 .category-con {
   display: flex;
   justify-content: flex-end;
@@ -279,6 +269,7 @@ section .movies {
   margin-bottom: 20px;
 }
 
+/* 장르 선택 버튼 */
 .category-btn {
   margin: 5px;
   padding: 10px 10px;
@@ -290,10 +281,12 @@ section .movies {
   cursor: pointer;
   border: none;
 }
+
 .category-btn:active {
   color: #ffba4c;
 }
 
+/* 구분 선 가상요소 */
 #movies-con::after,
 #recent-movies::after {
   content: '';
@@ -306,6 +299,7 @@ section .movies {
   background-color: #a8a8a8;
 }
 
+/* 포스터 디자인 */
 .movies li img,
 #recent-movies .movie-poster,
 #category .movies img {
@@ -316,6 +310,14 @@ section .movies {
 
 #recent-movies .movie-item.active .movie-poster {
   height: 400px;
+}
+
+/* 페이지네이션 */
+.pagination {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
 .pagination button {
@@ -340,6 +342,7 @@ section .movies {
   font-weight: bold;
 }
 
+/* 포스터 클릭 시 영화 정보 및 한줄평 작성 모달 */
 .modal {
   display: none;
   position: fixed;
@@ -384,7 +387,7 @@ section .movies {
 }
 
 .movie-detail {
-  flex: 1;
+  flex-grow: 1;
 }
 
 .movie-detail h2 {
@@ -438,17 +441,9 @@ section .movies {
   border: 1px solid #ddd;
   border-radius: 4px;
 }
+
 .modal-content {
   display: flex;
   gap: 20px;
   margin-bottom: 20px;
-}
-
-.modal-poster {
-  max-width: 200px;
-  height: auto;
-}
-
-.movie-detail {
-  flex-grow: 1;
 }

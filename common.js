@@ -34,7 +34,7 @@ const fetchTopRatedMovies = async (page = 1) => {
     totalPages = data.total_pages;
     return data.results;
   } catch (error) {
-    console.error('Error fetching top rated movies:', error);
+    console.error(error);
   }
 };
 
@@ -49,7 +49,7 @@ const searchMovies = async (query, page = 1) => {
     totalPages = data.total_pages;
     return data.results;
   } catch (error) {
-    console.error('Error searching movies:', error);
+    console.error(error);
   }
 };
 
@@ -60,7 +60,7 @@ const fetchNowPlayingMovies = async (page = 1) => {
     const data = await response.json();
     return data.results;
   } catch (error) {
-    console.error('Error fetching now playing movies:', error);
+    console.error(error);
   }
 };
 
@@ -74,29 +74,29 @@ const fetchMoviesByGenre = async (genreId, page = 1) => {
     const data = await response.json();
     return data.results;
   } catch (error) {
-    console.error('Error fetching movies by genre:', error);
+    console.error(error);
   }
 };
 
-// 영화 상세 정보 가져오기
+// 영화 정보 가져오기
 const fetchMovieDetails = async (movieId) => {
   try {
     const response = await fetch(`${URL}/movie/${movieId}?api_key=${API_KEY_TMDB}&language=ko`, options);
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching movie details:', error);
+    console.error(error);
   }
 };
 
-// 영화 크레딧 정보 가져오기
+// 영화 상세 정보 가져오기 (감독, 배우 등)
 const fetchMovieCredits = async (movieId) => {
   try {
     const response = await fetch(`${URL}/movie/${movieId}/credits?api_key=${API_KEY_TMDB}&language=ko`, options);
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching movie credits:', error);
+    console.error(error);
   }
 };
 
@@ -105,8 +105,9 @@ const openModal = async (movieId) => {
   currentMovieId = movieId;
   const movieDetails = await fetchMovieDetails(movieId);
   const movieCredits = await fetchMovieCredits(movieId);
-
+  // 감독
   const director = movieCredits.crew.find((person) => person.job === 'Director');
+  //  주요 배우 5명
   const cast = movieCredits.cast
     .slice(0, 5)
     .map((actor) => actor.name)
@@ -377,7 +378,7 @@ const loadMoviesByGenre = async (genreId, genreName) => {
   }
 };
 
-// 장르 버튼 초기화
+// 장르선택 버튼 초기화
 const initGenreButtons = async () => {
   const genresResponse = await fetch(`${URL}/genre/movie/list?api_key=${API_KEY_TMDB}&language=ko`, options);
   const genresData = await genresResponse.json();
@@ -406,7 +407,7 @@ async function init() {
   if (actionGenreId) {
     await loadMoviesByGenre(actionGenreId, '액션');
   } else {
-    console.error('Failed to load action genre');
+    console.error('영화를 불러오는데 실패했습니다.');
   }
 
   $searchButton.addEventListener('click', loadSearchResults);
@@ -416,9 +417,9 @@ async function init() {
     }
   });
 
-  // 모달 닫기 버튼에 이벤트 리스너 추가
+  // 모달 닫기 버튼 이벤트 리스너
   document.querySelector('.close-btn').addEventListener('click', closeModal);
-  // 모든 영화 카드에 클릭 이벤트 추가
+  // 모든 영화 카드에 클릭 이벤트
   addClickEventToMovieCards();
 
   // 로고 클릭 시 페이지 새로고침
