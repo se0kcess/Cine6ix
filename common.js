@@ -25,6 +25,9 @@ let totalPages = 1;
 let currentMovies = [];
 let currentSearchQuery = '';
 let currentMovieId = null;
+let categoryCurrentPage = 1;
+let categoryTotalPages = 1;
+let currentGenreId = null;
 
 // 인기 영화 가져오기
 const fetchTopRatedMovies = async (page = 1) => {
@@ -72,6 +75,7 @@ const fetchMoviesByGenre = async (genreId, page = 1) => {
       options
     );
     const data = await response.json();
+    categoryTotalPages = data.total_pages;
     return data.results;
   } catch (error) {
     console.error(error);
@@ -232,6 +236,49 @@ const changePage = async (newPage) => {
   updatePagination();
 };
 
+// 장르별 영화 페이지네이션 업데이트 함수
+const updateCategoryPagination = () => {
+  const $categoryPagination = document.getElementById('category-pagination');
+  $categoryPagination.innerHTML = '';
+  const totalPagesToShow = Math.min(5, categoryTotalPages);
+  let startPage = Math.max(categoryCurrentPage - 2, 1);
+  let endPage = Math.min(startPage + totalPagesToShow - 1, categoryTotalPages);
+
+  if (endPage - startPage + 1 < totalPagesToShow) {
+    startPage = Math.max(endPage - totalPagesToShow + 1, 1);
+  }
+
+  // 이전 버튼
+  if (categoryCurrentPage > 1) {
+    const prevButton = createPageButton('이전', () => changeCategoryPage(categoryCurrentPage - 1));
+    $categoryPagination.appendChild(prevButton);
+  }
+
+  // 페이지 번호 버튼
+  for (let i = startPage; i <= endPage; i++) {
+    const pageButton = createPageButton(i, () => changeCategoryPage(i), i === categoryCurrentPage);
+    $categoryPagination.appendChild(pageButton);
+  }
+
+  // 다음 버튼
+  if (categoryCurrentPage < categoryTotalPages) {
+    const nextButton = createPageButton('다음', () => changeCategoryPage(categoryCurrentPage + 1));
+    $categoryPagination.appendChild(nextButton);
+  }
+};
+
+// 장르별 영화 페이지 변경 함수
+const changeCategoryPage = async (newPage) => {
+  if (newPage < 1 || newPage > categoryTotalPages) return;
+
+  categoryCurrentPage = newPage;
+  const movies = await fetchMoviesByGenre(currentGenreId, categoryCurrentPage);
+  if (movies) {
+    displayMovies(movies, $categoryMovies);
+    updateCategoryPagination();
+  }
+};
+
 // 리뷰 저장
 const saveReview = (review) => {
   localStorage.setItem(`review_${currentMovieId}`, review);
@@ -363,10 +410,13 @@ const loadNowPlayingMoviesSlider = async () => {
 
 // 장르별 영화 로드
 const loadMoviesByGenre = async (genreId, genreName) => {
-  const movies = await fetchMoviesByGenre(genreId);
+  currentGenreId = genreId;
+  categoryCurrentPage = 1;
+  const movies = await fetchMoviesByGenre(genreId, categoryCurrentPage);
   if (movies) {
-    displayMovies(movies.slice(0, 15), $categoryMovies);
+    displayMovies(movies, $categoryMovies);
     document.querySelector('#category h2').textContent = `${genreName} 영화`;
+    updateCategoryPagination();
 
     // 활성 버튼 스타일 변경
     $categoryButtons.forEach((button) => {
@@ -419,8 +469,12 @@ async function init() {
 
   // 모달 닫기 버튼 이벤트 리스너
   document.querySelector('.close-btn').addEventListener('click', closeModal);
+
   // 모든 영화 카드에 클릭 이벤트
   addClickEventToMovieCards();
+
+  // 카테고리 페이지네이션 초기화
+  updateCategoryPagination();
 
   // 로고 클릭 시 페이지 새로고침
   $logo.addEventListener('click', () => {

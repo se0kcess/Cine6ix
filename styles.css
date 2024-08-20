@@ -342,6 +342,36 @@ section .movies {
   font-weight: bold;
 }
 
+/* 카테고리 페이지네이션 */
+#category-pagination {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+#category-pagination button {
+  padding: 12px 15px;
+  margin: 0 4px;
+  border: 1px solid #ffba4c;
+  border-radius: 20px;
+  background-color: transparent;
+  color: #ffba4c;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#category-pagination button:hover {
+  background-color: #ffba4c;
+  color: white;
+}
+
+#category-pagination button.active {
+  background-color: white;
+  color: #ffba4c;
+  font-weight: bold;
+}
+
 /* 포스터 클릭 시 영화 정보 및 한줄평 작성 모달 */
 .modal {
   display: none;
